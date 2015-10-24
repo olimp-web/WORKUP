@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 PREREQ_APPS = [
+    'flat',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,7 +41,7 @@ PREREQ_APPS = [
 ]
 
 PROJECT_APPS = [
-
+    'main_app',
 ]
 
 INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS

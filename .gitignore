@@ -1,2 +1,5 @@
 .idea/
 #project/workup/settings/local
+*.sqlite3
+__pycache__/
+*.pyc
