@@ -23,8 +23,8 @@ class Person(models.Model):
         Информация о пользователях
     """
 
-    #Пользовательский уровень приватности
-    _PRIVATE_SUFFIX = "__private"
+    # Пользовательский уровень приватности
+    _PRIVATE_SUFFIX = "_MOD_private"
 
     user = models.OneToOneField(User)
     user_name = models.CharField(max_length=100,)
