@@ -13,6 +13,7 @@ class Person(models.Model):
     _PRIVATE_SUFFIX = "_MOD_private"
 
     _PRIVATE_CHOICES = (
+        ('0', 'Видно только мне'),
         ('1', 'Видно всем'),
         ('2', 'Видно друзьям'),
         ('3', 'Видно колегам'),
@@ -47,4 +48,3 @@ class UserSkills(models.Model):
     grade = models.SmallIntegerField(help_text='Уровнь владения навыком')
     private = models.CharField(max_length=1,
                                choices=Person._PRIVATE_CHOICES)
-
