@@ -32,6 +32,12 @@ class Person(models.Model):
                                             choices=_PRIVATE_CHOICES
                                             )
 
+    email = models.EmailField(default=None, blank=True, null=True)
+    email_MOD_private = models.CharField(max_length=1,
+                                            choices=_PRIVATE_CHOICES,
+                                            default='0'
+                                            )
+
     # def get_pivate(self, attr):
     #     suffix = self._PRIVATE_SUFFIX
     #     # if hasattr(self, (attr.__name__+ suffix)):
