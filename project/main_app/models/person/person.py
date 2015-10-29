@@ -32,12 +32,6 @@ class Person(models.Model):
                                             choices=_PRIVATE_CHOICES
                                             )
 
-    email = models.EmailField(default=None, blank=True, null=True)
-    email_MOD_private = models.CharField(max_length=1,
-                                            choices=_PRIVATE_CHOICES,
-                                            default='0'
-                                            )
-
     # def get_pivate(self, attr):
     #     suffix = self._PRIVATE_SUFFIX
     #     # if hasattr(self, (attr.__name__+ suffix)):
@@ -45,7 +39,17 @@ class Person(models.Model):
 
 #
 #
+
     skills = models.ManyToManyField(Skill, through='UserSkills')
+
+class Contact(models.Model):
+    person = models.ForeignKey(Person)
+    type = models.CharField(max_length=16)
+    contact = models.CharField()
+    private = models.CharField(max_length=1,
+                               choices=_PRIVATE_CHOICES,
+                               default='0'
+                              )
 
 
 class UserSkills(models.Model):
