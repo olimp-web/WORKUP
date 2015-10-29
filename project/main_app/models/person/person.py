@@ -47,4 +47,5 @@ class UserSkills(models.Model):
     skill = models.ForeignKey(Skill)
     grade = models.SmallIntegerField(help_text='Уровнь владения навыком')
     private = models.CharField(max_length=1,
-                               choices=Person._PRIVATE_CHOICES)
+                               choices=Person._PRIVATE_CHOICES,
+                               default='0')
