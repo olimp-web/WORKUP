@@ -1,21 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User, UserManager
+from django.contrib.auth.models import User
 
-
-class SkillCategory(models.Model):
-    """Категории навыков"""
-
-    name = models.CharField(max_length=30,
-                            unique=True,
-                            )
-
-
-class Skill(models.Model):
-    """Навыки"""
-    name = models.CharField(max_length=128,
-                            unique=True,
-                            )
-    category = models.ForeignKey(SkillCategory)
+from .skill import Skill
 
 
 class Person(models.Model):
@@ -61,3 +47,4 @@ class UserSkills(models.Model):
     grade = models.SmallIntegerField(help_text='Уровнь владения навыком')
     private = models.CharField(max_length=1,
                                choices=Person._PRIVATE_CHOICES)
+
