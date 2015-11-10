@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from project.main_app.models.skill import Skill
+from .skill import Skill
 
 _PRIVATE_CHOICES = (
     ('0', 'Видно только мне'),
@@ -34,7 +34,7 @@ class Person(models.Model):
                                             db_column='birthday_MOD_private',
                                             choices=_PRIVATE_CHOICES
                                             )
-    city = models.ForeignKey(City,
+    city = models.ForeignKey('City',
                              verbose_name='Город')
 
     skills = models.ManyToManyField(Skill, through='UserSkills')
@@ -48,7 +48,7 @@ class City(models.Model):
 class Contact(models.Model):
     person = models.ForeignKey(Person)
     type = models.CharField(max_length=16)
-    contact = models.CharField()
+    content = models.CharField(max_length=100)
     private = models.CharField(max_length=1,
                                choices=_PRIVATE_CHOICES,
                                default='0')
