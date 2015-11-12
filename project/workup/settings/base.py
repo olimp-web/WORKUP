@@ -41,6 +41,7 @@ PREREQ_APPS = [
 
 PROJECT_APPS = [
     'main_app',
+    'w_auth',
 ]
 
 INSTALLED_APPS = PREREQ_APPS + PROJECT_APPS
@@ -61,7 +62,7 @@ ROOT_URLCONF = 'workup.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,4 +123,4 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-AUTH_USER_MODEL = 'django.contrib.auth.model.User'
+AUTH_USER_MODEL = 'w_auth.CustomUser'
