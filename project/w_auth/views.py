@@ -4,8 +4,9 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import render, redirect
 
 
-def login():
-    pass
+def login(request):
+    if not request.POST:
+        return render(request, "test_auth_form.html")
 
 def logout(request):
     auth.logout(request)
