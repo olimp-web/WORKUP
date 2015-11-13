@@ -1,6 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.views import generic
+
+from .models import Person
 # Create your views here.
 
 
@@ -18,5 +21,6 @@ def index(request):
     return HttpResponse('Home')
 
 
-def UserController(request, person_id):
-    return HttpResponse('User' + person_id)
+class PersonDetail(generic.DetailView):
+    model=Person
+    #template_name = "main_app/person_detail.html"
