@@ -7,16 +7,16 @@ from django.http import HttpResponse
 def search(request):
     return HttpResponse('Search')
 
-@login_required
+# @login_required
 def profile(request):
     # id = request.user.user_id
     # return UserController(request, id)
-    return HttpResponse('profile')
+    return HttpResponse('profile ' + request.user.email)
 
 
 def index(request):
     return HttpResponse('Home')
 
 
-def UserController(request, user_id):
-    return HttpResponse('User' + user_id)
+def UserController(request, person_id):
+    return HttpResponse('User' + person_id)

@@ -5,12 +5,13 @@ from django.shortcuts import render, redirect
 
 from .forms import LoginForm
 
-_login_form_template = "w_auth/test_auth_form.html"
-# _success_url = reverse("main:profile")
-_success_url = "profile"
+
+# _success_url = "/profile"
 
 
 def login(request):
+    _login_form_template = "w_auth/test_auth_form.html"
+    _success_url = reverse('main:profile')
 
     if not request.POST:
         form = LoginForm()
