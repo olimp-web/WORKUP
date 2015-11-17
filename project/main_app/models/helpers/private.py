@@ -12,10 +12,13 @@ _PRIVACY_CHOICES = (
 )
 
 class PrivateField(object):
+    _privacy_user_field = None
+
     def __init__(self, user_field):
+        self._privacy_user_field = user_field
         user_field._privacy = self
 
-    def _make_privacy_field(self):
+    def _make_privacy_field(self, model):
         privacy_field_name = self.name + _PRIVACY_FIELD_SUFFIX
 
         privacy_field = models.CharField(
@@ -30,10 +33,19 @@ class PrivateField(object):
 
         return privacy_field
 
-def private_field(model):
+    def __getattr__(self, name):
+        return getattr(self._privacy_user_field, name)
+
+    def __setattr__(self, name, value):
+        if name not in dir(self):
+            return setattr(self._privacy_user_field, name, value)
+        else:
+            super().__setattr__(name, value)
+
+def private_fields_model(model):
     for prop in model._meta.fields:
         if '_privacy' in dir(prop):
-            privacy_field = prop._privacy._make_privacy_field()
+            privacy_field = prop._privacy._make_privacy_field(model)
             model._meta.add_field(privacy_field)
 
     return model
