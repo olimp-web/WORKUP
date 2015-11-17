@@ -20,7 +20,7 @@ class AccountAdmin(admin.ModelAdmin):
     list_filter = ('is_active', 'is_staff', 'is_superuser')
     ordering = ('created',)
     readonly_fields = ('created', 'last_login', 'password')
-
+    search_fields = ('email', 'created')
 #     TODO add 'set password' btn.
 #     TODO change create form.
 #     Look import django.contrib.auth.admin
