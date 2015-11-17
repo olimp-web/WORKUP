@@ -128,4 +128,4 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 # MEDIAFILES_DIRS = ['media',                 ]
 
-AUTH_USER_MODEL = 'w_auth.CustomUser'
+AUTH_USER_MODEL = 'w_auth.Account'
