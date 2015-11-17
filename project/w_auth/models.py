@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 from django.utils.translation import ugettext_lazy as _
+from django.utils import timezone
 
 
 class AccountManager(BaseUserManager):
@@ -11,6 +12,7 @@ class AccountManager(BaseUserManager):
                           is_staff=is_staff, is_active=True, is_superuser=is_superuser,
                           **extra_fields)
         user.set_password(password)
+        user.created = timezone.now
         user.save(using=self._db)
         return user
 
@@ -35,14 +37,16 @@ class Account(AbstractBaseUser, PermissionsMixin):
                                     help_text=_('Designates whether this user should be treated as '
                                                 'active. Unselect this instead of deleting accounts.'))
 
+    created = models.DateTimeField(_('Создан'), default=timezone.now)
+
     objects = AccountManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ()
 
     class Meta:
-        verbose_name = _('account')
-        verbose_name_plural = _('account')
+        verbose_name = _('аккаунт')
+        verbose_name_plural = _('аккаунты')
 
     # def email_user(self, subject, message, from_email=None, **kwargs):
     #     """
@@ -51,7 +55,10 @@ class Account(AbstractBaseUser, PermissionsMixin):
     #     send_mail(subject, message, from_email, [self.email], **kwargs)
 
     def get_full_name(self):
-        return self.staff_name
+        return '{} ({})'.format(self.staff_name, self.email)
 
     def get_short_name(self):
-        return self.staff_name
+        return self.staff_name + ' ^'
+
+    def __str__(self):
+        return self.email
