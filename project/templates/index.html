@@ -1,0 +1,15 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head lang="ru">
+    <meta charset="UTF-8">
+    <title>WORKUP</title>
+</head>
+<body>
+    <div class="auth-widjet">
+        {% include "w_auth/login_form.html" %}
+    </div>
+    <script type="text/javascript" src="{% static 'lib/jquery-2.1.4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'w_auth/login_form.js' %}"></script>
+</body>
+</html>

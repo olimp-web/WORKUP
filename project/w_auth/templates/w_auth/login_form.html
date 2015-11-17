@@ -1,0 +1,12 @@
+<div class="login-form-wrapper">
+        <h2>Вход</h2>
+        <form action="{% url 'w_auth:login' %}" method="post" class="form-as-p" id="login-form">
+            {% csrf_token %}
+            {{ login_form.as_p }}
+
+            <p class="errors-box">{{ errors }}</p>
+            <p class="submit-button">
+                <input type="submit" class="button" value="Войти" />
+            </p>
+        </form>
+</div>
