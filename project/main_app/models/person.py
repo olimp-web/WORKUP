@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 
 from .skill import Skill
 
@@ -20,7 +20,7 @@ class Person(models.Model):
 
     _PRIVATE_SUFFIX = "_MOD_private"
 
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL)
     user_name = models.CharField(max_length=100,
                                  verbose_name='Имя')
     user_surname = models.CharField(max_length=100,
