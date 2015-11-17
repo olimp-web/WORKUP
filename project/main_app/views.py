@@ -1,25 +1,21 @@
-<<<<<<< HEAD
-from django.shortcuts import render, render_to_response
-from django.http import HttpResponse
-from main_app.models.person import City, Person
-
-=======
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.http import HttpResponse
 from django.core.urlresolvers import reverse, reverse_lazy
+
 from w_auth.forms import LoginForm
->>>>>>> dev
+
+from main_app.models.person import City, Person
 # Create your views here.
 
 
 def search(request):
-<<<<<<< HEAD
-
     return HttpResponse(request, 'Search')
 
-def profile(request, id = 2):
-    person = Person.objects.get(id = id)
+@login_required(login_url=reverse_lazy('w_auth:index'))
+def profile(request):
+    account = request.user
+    person = Person.objects.get(user=account)
     user_name = person.user_name
     user_surname = person.user_surname
     gender = person.gender
@@ -34,20 +30,6 @@ def profile(request, id = 2):
     #return HttpResponse('profile ' + all_c)
     #return render_to_response({'articles': City.objects.all()})
 
-
-
-def landing(request):
-    return HttpResponse(request, 'Home')
-=======
-    return HttpResponse('Search')
-
-@login_required(login_url=reverse_lazy('w_auth:index'))
-def profile(request):
-    # id = request.user.user_id
-    # return UserController(request, id)
-    return HttpResponse('profile ' + request.user.email)
-
-
 def index(request):
     if request.user.is_authenticated():
         return redirect(reverse('main:profile'))
@@ -57,4 +39,3 @@ def index(request):
 
 def UserController(request, person_id):
     return HttpResponse('User' + person_id)
->>>>>>> dev
