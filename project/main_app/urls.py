@@ -5,4 +5,5 @@ urlpatterns = [
     url(r'^$', views.landing),
     url(r'^search/', views.search),
     url(r'^profile', views.profile),
+    url(r'^profile/(?P<id>\d+)/$', views.profile),
 ]

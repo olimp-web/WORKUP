@@ -17,6 +17,7 @@ class Person(models.Model):
     """
 
     # Пользовательский уровень приватности
+
     _PRIVATE_SUFFIX = "_MOD_private"
 
     user = models.OneToOneField(User)
@@ -38,10 +39,16 @@ class Person(models.Model):
                              verbose_name='Город')
 
     skills = models.ManyToManyField(Skill, through='UserSkills')
+    def __str__(self):
+        return '%s' %(self.user_name)
 
 class City(models.Model):
     name = models.CharField(max_length=100,
                             help_text="Название")
+    def __str__(self):
+        return self.name
+    #def __unicode__(self):
+    #    return self.neme
 
 
 
