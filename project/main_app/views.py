@@ -8,21 +8,21 @@ from w_auth.forms import LoginForm
 from main_app.models.person import City, Person
 # Create your views here.
 
-
 def search(request):
     return HttpResponse(request, 'Search')
 
 @login_required(login_url=reverse_lazy('w_auth:index'))
 def profile(request):
-    account = request.user
-    person = Person.objects.get(user=account)
-    user_name = person.user_name
-    user_surname = person.user_surname
-    gender = person.gender
-    city = City.objects.select_related().get(id = id)
-    c = city.name
-    birthday = person.birthday
-    return HttpResponse(user_name + ' ' + user_surname + ' ' + c + ' ' + str(birthday) )
+    person = Person.objects.get(user=request.user)
+    return render(request, "main_app/profile.html", {"profile":person})
+    #user_name = person.user_name
+    #user_surname = person.user_surname
+    #gender = person.gender
+    # city = City.objects.select_related().get(id = id)
+    #c = person.city
+    # c = city.name
+    #birthday = person.birthday
+    #return HttpResponse(user_name + ' ' + user_surname + ' ' + c.__str__() + ' ' + str(birthday) )
     #al = all_c.values("id", "name")
     #qwe = all_c.values
     #all_c1 = all_c.values("id", "name")

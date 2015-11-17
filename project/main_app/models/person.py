@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.conf import settings
 
 from .skill import Skill
@@ -25,6 +26,7 @@ class Person(models.Model):
                                  verbose_name='Имя')
     user_surname = models.CharField(max_length=100,
                                     verbose_name='Фамилия')
+
     gender = models.CharField(max_length=1,
                               verbose_name='Пол',
                               choices=(('m', 'Мужской'),
@@ -47,8 +49,6 @@ class City(models.Model):
                             help_text="Название")
     def __str__(self):
         return self.name
-    #def __unicode__(self):
-    #    return self.neme
 
 
 
@@ -91,3 +91,5 @@ class Education(models.Model):
     group = models.CharField(max_length=10,
                              verbose_name="Группа",
                              help_text="Группа")
+    def __str__(self):
+        return ", ".join([self.university, self.subdivision, self.department])

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  {% block profile %}
+    {{ profile.user_name }}
+    {{ profile.user_surname }}
+    {{ profile.city }}
+    {{ profile.birthday }}
+    {{ profile.get_gender_display }}
+    <ul>
+    {% for education in profile.education_set.all %}
+      <li>{{ education.university }}</li>
+      <li>{{ education.subdivision }}</li>
+      <li>{{ education.department }}</li>
+      <li>{{ education.begin_year }}</li>
+      <li>{{ education.end_year }}</li>
+      <li>{{ education.group }}</li>
+    {% endfor %}
+    </ul>
+  {% endblock%}
+
+</body>
+</html>
