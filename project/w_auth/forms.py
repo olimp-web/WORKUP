@@ -2,8 +2,9 @@ from django import forms
 
 
 class LoginForm(forms.Form):
-    def __init__(self):
+    def __init__(self, *args, **kvargs):
         super(LoginForm, self).__init__(
+            *args,
             auto_id='%s',
             label_suffix='',
         )
