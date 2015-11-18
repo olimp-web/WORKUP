@@ -32,6 +32,7 @@ class Person(models.Model):
     birthday = models.DateField()
     birthday_MOD_private = models.CharField(max_length=1,
                                             db_column='birthday_MOD_private',
+                                            verbose_name='приватность',
                                             choices=_PRIVATE_CHOICES
                                             )
     city = models.ForeignKey('City',
@@ -39,19 +40,49 @@ class Person(models.Model):
 
     skills = models.ManyToManyField(Skill, through='UserSkills')
 
+    class Meta:
+        verbose_name = 'личность'
+        verbose_name_plural = 'личности'
+
+    def __str__(self):
+        return ' '.join([self.user_name, self.user_surname])
+
+
 class City(models.Model):
     name = models.CharField(max_length=100,
                             help_text="Название")
 
+    class Meta:
+        verbose_name = 'город'
+        verbose_name_plural = 'города'
+
+    def __str__(self):
+        return self.name
 
 
 class Contact(models.Model):
+    TYPE = (
+        ('e', 'email'),
+        ('t', 'Телефон'),
+        ('s', 'Ссылка на аккаунт в соц. сети'),
+    )
+
     person = models.ForeignKey(Person)
-    type = models.CharField(max_length=16)
+    type = models.CharField(max_length=1,
+                            verbose_name='Способ связи',
+                            choices=TYPE)
     content = models.CharField(max_length=100)
     private = models.CharField(max_length=1,
                                choices=_PRIVATE_CHOICES,
-                               default='0')
+                               default='0',
+                               verbose_name='Приватность')
+
+    class Meta:
+        verbose_name = 'контактная информация'
+        verbose_name_plural = 'контактная информация'
+
+    def __str__(self):
+        return ': '.join([self.type, self.content])
 
 
 class UserSkills(models.Model):
@@ -63,7 +94,8 @@ class UserSkills(models.Model):
     grade = models.SmallIntegerField(help_text='Уровнь владения навыком')
     private = models.CharField(max_length=1,
                                choices=_PRIVATE_CHOICES,
-                               default='0')
+                               default='0',
+                               verbose_name='приватность')
 
 
 class Education(models.Model):
@@ -84,3 +116,10 @@ class Education(models.Model):
     group = models.CharField(max_length=10,
                              verbose_name="Группа",
                              help_text="Группа")
+
+    class Meta:
+        verbose_name = 'высшее образование'
+        verbose_name_plural = 'высшие образования'
+
+    def __str__(self):
+        return '{}: {} (by {})'.format(self.university, self.group, self.person)
