@@ -25,4 +25,8 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': 'account',
             },
         ),
+        migrations.CreateModel(
+            name='Account',
+            fields=[],
+        ),
     ]
